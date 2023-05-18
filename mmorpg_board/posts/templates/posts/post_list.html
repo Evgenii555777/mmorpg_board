@@ -1,0 +1,47 @@
+<style>
+    .create-post-btn {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+    }
+    .register-btn {
+        position: absolute;
+        top: 30px;
+        right: 150px;
+    }
+    .post {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .post-title {
+        font-size: 30px;
+        font-weight: bold;
+    }
+    .post-text {
+        font-size: 20px;
+    }
+    .post-image img {
+        height: 300px;
+        width: 600px;
+    }
+</style>
+
+<a href="{% url 'new_post' %}" class="create-post-btn">Создать пост</a>
+<a href="{% url 'register' %}" class="register-btn">Зарегистрироваться</a>
+<a href="{% url 'private_page' %}">Моя страница</a>
+
+{% for post in posts %}
+    <div class="post">
+        <h2 class="post-title">{{ post.title }}</h2>
+        {% if post.image %}
+            <div class="post-image"><img src="{{ post.image.url }}"></div>
+        {% endif %}
+        <p class="post-text">{{ post.text }}</p>
+        <a href="{% url 'post_detail' pk=post.pk %}">Подробнее</a>
+    </div>
+{% empty %}
+    <p>No posts yet.</p>
+{% endfor %}
+

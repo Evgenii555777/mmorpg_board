@@ -1,0 +1,26 @@
+<style>
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+    .form-container form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .form-container form input,
+    .form-container form button {
+        margin: 10px;
+    }
+</style>
+
+<div class="form-container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Создать пост</button>
+    </form>
+</div>

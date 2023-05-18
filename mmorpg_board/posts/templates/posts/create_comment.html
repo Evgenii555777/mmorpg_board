@@ -1,0 +1,11 @@
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
+    <a href="{% url 'post_list' %}" style="position: absolute; top: 50px; right: 50px;">Вернуться на главную</a>
+    <h2>{{ post.title }}</h2>
+    <p>Дата создания: {{ post.created_date }}</p>
+    <h2>Оставить комментарий</h2>
+    <form method="POST" style="text-align: center;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+</div>

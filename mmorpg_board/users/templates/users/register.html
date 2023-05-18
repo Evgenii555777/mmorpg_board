@@ -1,0 +1,38 @@
+<style>
+    .centered-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .centered-form form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .centered-form form label, .centered-form form input, .centered-form form button {
+        margin: 10px;
+    }
+</style>
+
+<div class="centered-form">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        <br>
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        <br>
+        {{ form.password1.label_tag }}
+        {{ form.password1 }}
+        <br>
+        {{ form.password2.label_tag }}
+        {{ form.password2 }}
+        <br>
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+</div>

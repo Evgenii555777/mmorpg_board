@@ -1,0 +1,32 @@
+<div class="post">
+    <div class="post-title" style="text-align: center; font-weight: bold;">{{ post.title }}</div>
+    <div class="post-image" style="display: flex; justify-content: center;">
+        <img src="{{ MEDIA_URL }}{{ post.image.url }}" style="max-width: 600px; max-height: 300px;">
+    </div>
+    <div class="post-text" style="text-align: center;">{{ post.text }}</div>
+    <div class="post-author" style="text-align: center;">Автор: {{ post.author.username }}</div>
+    <div class="post-comments" style="margin-top: 20px;">
+        <div>
+            <h3 style="text-align: center;">Комментарии:</h3>
+        </div>
+        {% for comment in post.comments.all %}
+            <div class="comment" style="text-align: center;">
+                <div class="comment-author">{{ comment.author.username }} <span class="comment-date">{{ comment.date }}</span></div>
+                <div class="comment-text">{{ comment.text }}</div>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+    <div class="leave-comment" style="text-align: center;">
+        <a href="{% url 'create_comment' post.pk %}">Оставить комментарий</a>
+    </div>
+    <div class="return-home" style="position: fixed; top: 50px; right: 50px;">
+        <a href="{% url 'post_list' %}">Вернуться на главную</a>
+    </div>
+
+    {% if user.is_authenticated %}
+        <div class="user-info" style="text-align: center;">
+            <p>Вы вошли как: {{ user.username }}</p>
+        </div>
+    {% endif %}
+</div>

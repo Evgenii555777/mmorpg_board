@@ -1,0 +1,32 @@
+<h2>Отклики на ваши объявления</h2>
+
+<!-- Форма для фильтрации откликов -->
+<form method="GET">
+    <select name="post">
+        <option value="">Все объявления</option>
+        {% for post in user.posts.all %}
+            <option value="{{ post.title }}">{{ post.title }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Фильтровать</button>
+</form>
+
+<ul>
+    {% for comment in comments %}
+        <li>
+            <p>{{ comment.text }}</p>
+            <p>Автор: {{ comment.author }}</p>
+            <p>Дата: {{ comment.date }}</p>
+            {% if comment.post.author == user %}
+                <form method="POST" action="{% url 'delete_comment' comment.pk %}">
+                    {% csrf_token %}
+                    <button type="submit">Удалить</button>
+                </form>
+                <form method="POST" action="{% url 'accept_comment' comment.pk %}">
+                    {% csrf_token %}
+                    <button type="submit">Принять</button>
+                </form>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
